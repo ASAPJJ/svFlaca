@@ -8,5 +8,4 @@ const dbConnect = async () => {
         console.log('Error al conectar la base de datos', error.message);
     }
 }
-
 module.exports= dbConnect;

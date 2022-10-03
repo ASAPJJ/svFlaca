@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const path = require('path');
 require('ejs');
 
-const dbConnect = require('./db');//futura conexion
+const dbConnect = require('./db');// conexion
 
 //Iniciando express y conectando la base de datos
 const app= express();
