@@ -1,4 +1,3 @@
-//const ctrlproduct=require('../models/products');
 const ctrlproduct={};
 ctrlproduct.getproduct=(req,res)=>{
     res.send({
@@ -21,4 +20,3 @@ ctrlproduct.deleteproduct=(req,res)=>{
     })
 }
 module.exports=ctrlproduct;
-
