@@ -34,6 +34,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //Importacion de futuras rutas
+app.use(require('./routes/product.routes'))
 
 
 //config del puerto

@@ -1,4 +1,4 @@
-const ctrlproduct=require('../models/products');
+//const ctrlproduct=require('../models/products');
 const ctrlproduct={};
 ctrlproduct.getproduct=(req,res)=>{
     res.send({

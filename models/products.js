@@ -1,4 +1,4 @@
-const {model, schema, models}=require('mongoose');
+const {model, schema}=require('moongose');
 const productSchema= new schema({
     nombre:{
 type: String, 
@@ -12,5 +12,7 @@ required:true
 type: Number, 
 required:true
     }
-})
-module.exports=models('product',productSchema)
+},{timestamps: true,
+  versionkey:false});
+  
+module.exports=model('product',productSchema)
