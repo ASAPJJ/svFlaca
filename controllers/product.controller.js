@@ -1,3 +1,4 @@
+//guardar en una constante
 const ctrlproduct={};
 ctrlproduct.getproduct=(req,res)=>{
     res.send({

@@ -6,6 +6,7 @@ putproduct,
 deleteproduct
 }=require('../controllers/product.controller');
 
+//requiere controladores
 router.get('/product',getproduct);
 router.post('/product',postproduct);
 router.put('/product',putproduct);
