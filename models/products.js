@@ -1,4 +1,5 @@
 const {model, schema}=require('moongose');
+//modelado del dato
 const productSchema= new schema({
     nombre:{
 type: String, 
