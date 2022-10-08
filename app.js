@@ -1,5 +1,3 @@
-
-
 //Librerias instaladas
 const express = require('express')
 const cors = require('cors');
@@ -8,7 +6,7 @@ const helmet = require('helmet');
 const path = require('path');
 require('ejs');
 
-const dbConnect = require('./db');//futura conexion
+const dbConnect = require('./src/db/db');//futura conexion
 
 //Iniciando express y conectando la base de datos
 const app= express();
@@ -34,7 +32,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //Importacion de futuras rutas
-
+app.use(require('./routes/home.routes'))
 
 //config del puerto
 app.listen(port, ()=> console.log(`Servidor escuchando en: ${port}`));
