@@ -1,5 +1,3 @@
-
-
 //Librerias instaladas
 const express = require('express')
 const cors = require('cors');
@@ -8,7 +6,7 @@ const helmet = require('helmet');
 const path = require('path');
 require('ejs');
 
-const dbConnect = require('./db');// conexion
+const dbConnect = require('./db/db');// conexion
 
 //Iniciando express y conectando la base de datos
 const app= express();
@@ -34,7 +32,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //Importacion de futuras rutas
-app.use(require('./routes/product.routes'))
+
+app.use(require('./routes/user.routes'))
+app.use(require('./routes/task.routes'))
+app.use(require('./routes/auth.routes'))
 
 
 //config del puerto

@@ -1,4 +1,4 @@
-const {model, schema}=require('moongose');
+//const {model, schema}=require('moongose');
 const {model, Schema } = require('mongoose');
 
 const TaskSchema = new Schema({
@@ -19,7 +19,7 @@ const TaskSchema = new Schema({
         default: false
     },
     userId:{
-        type: Schema.Types.ObjectId, ref: 'users'
+        type: Schema.Types.ObjectId, ref: 'user'
     },
     categories: [
         {type: Schema.Types.ObjectId, ref: 'Categories'}
