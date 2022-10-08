@@ -34,8 +34,12 @@ ctrlAuth.iniciarSesion = async(req, res) => {
                 msg: 'Error al autenticarse (contra)'
             })
         }
+        const token = await generarJWT({uid:user._id})
+        res.json(token)
     }catch(error){
+        console.log(error)
         return res.json({msg: 'Error al iniciar sesion'});
+        
     }
 };
 

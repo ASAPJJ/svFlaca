@@ -7,6 +7,7 @@ const path = require('path');
 require('ejs');
 
 const dbConnect = require('./src/db/db');//futura conexion
+require('dotenv').config()
 
 //Iniciando express y conectando la base de datos
 const app= express();

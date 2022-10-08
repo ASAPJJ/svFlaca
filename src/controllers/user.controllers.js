@@ -1,18 +1,18 @@
-const user = require('../models/user');
+const User = require('../models/user');
 const bcrypt = require('bcrypt');
-const ctrluser = {};
+const ctrlUser = {};
 
 //Controlador para obtener todos los usuarios de la base de datos.
-ctrluser.getusers = async (req, res) => {
+ctrlUser.getUsers = async (req, res) => {
     //Se realiza consulta de todos los documentos en la base de datos.
-    const users = await user.find();
+    const users = await User.find();
 
     //Devolucion de los datos de usuario en un arreglo
     return res.json(users)
 };
 
 //Aca se crea un nuevo usuario en la base de datos
-ctrluser.postuser = async (req, res) =>{
+ctrlUser.postUser = async (req, res) =>{
     //Se obtienen los datos enviados por metodo POST
     const {username, password: passwordRecibida, email} = req.body;
 
@@ -20,7 +20,7 @@ ctrluser.postuser = async (req, res) =>{
     const newPassword= bcrypt.hashSync(passwordRecibida, 10);
 
     //Instancia un nuevo documento de mongoDB para luego ser guardado
-    const newuser = new user ({
+    const newuser = new User ({
         username,
         password: newPassword,
         email
@@ -37,7 +37,7 @@ ctrluser.postuser = async (req, res) =>{
 };
 
 //Controlador para actualizar usuario, se usa ID de usuario
-ctrluser.putuser = async(req, res) => {
+ctrlUser.putUser = async(req, res) => {
 
     const userId = req.params.id;
 
@@ -46,7 +46,7 @@ ctrluser.putuser = async(req, res) => {
     const data = {username, email, isActive, role};
 
     try{
-        const dataUpdated = await user.findByIdAndUpdate(userId, data, {new: true});
+        const dataUpdated = await User.findByIdAndUpdate(userId, data, {new: true});
         
         return res.json({
             msg: 'Usuario actualizado',
@@ -60,10 +60,10 @@ ctrluser.putuser = async(req, res) => {
 };
 
 //Eliminar usuario, usa ID
-ctrluser.deleteuser = async (req, res) => {
+ctrlUser.deleteUser = async (req, res) => {
     return res.json({
         msg: ''
     })
 }
 
-module.exports = ctrluser;
+module.exports = ctrlUser;

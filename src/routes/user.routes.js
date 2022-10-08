@@ -1,27 +1,25 @@
 const router = require('express').Router();
 
 const {
-    getUser,
+    getUsers,
     postUser,
     putUser,
     deleteUser,
+
 } = require('../controllers/user.controllers');
 const esAdmin = require('../middlewares/es-admin');
 const validarJWT = require('../middlewares/validar-jwt');
-const user = require('../models/user');
 
 //rutas
 
 //ruta para obtener usuarios
 router.get('/user',[
     validarJWT,
-    esAdmin,
-], getUser);
+    esAdmin
+], getUsers);
 
 //crear usuario
-router.post('/user',[
-    validarJWT
-], postUser);
+router.post('/user', postUser);
 
 //editar usuario, usa ID
 router.put('/user/:id', [
@@ -29,6 +27,8 @@ router.put('/user/:id', [
 ], putUser);
 
 //eliminar usuario, usa ID
-router.delete('/user', [], deleteUser);
+router.delete('/user', [
+    validarJWT
+], deleteUser);
 
 module.exports = router;
