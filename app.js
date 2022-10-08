@@ -25,7 +25,7 @@ app.use(morgan('dev'));
 app.use(helmet());
 
 //Archivos Estaticos
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'src/public')));
 
 //Motor de plantillas ejs
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +33,9 @@ app.set('view engine', 'ejs');
 
 //Importacion de futuras rutas
 app.use(require('./routes/home.routes'))
+app.use(require('./src/routes/user.routes'))
+app.use(require('./src/routes/task.routes'))
+app.use(require('./src/routes/auth.routes'))
 
 //config del puerto
 app.listen(port, ()=> console.log(`Servidor escuchando en: ${port}`));
