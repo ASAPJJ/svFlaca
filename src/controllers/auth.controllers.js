@@ -1,69 +1,42 @@
-const user = require('../models/user');
-const bcrypt = require('bcrypt');
-const ctrluser = {};
+const User = require('../models/user');
+const generarJWT = require('../helpers/generar-jwt');
+const bcrypt =require('bcrypt');
 
-//Controlador para obtener todos los usuarios de la base de datos.
-ctrluser.getusers = async (req, res) => {
-    //Se realiza consulta de todos los documentos en la base de datos.
-    const users = await user.find();
+const ctrlAuth = {};
 
-    //Devolucion de los datos de usuario en un arreglo
-    return res.json(users)
-};
+ctrlAuth.iniciarSesion = async(req, res) => {
 
-//Aca se crea un nuevo usuario en la base de datos
-ctrluser.postuser = async (req, res) =>{
-    //Se obtienen los datos enviados por metodo POST
-    const {username, password: passwordRecibida, email} = req.body;
-
-    //Encriptacion de la contraseña
-    const newPassword= bcrypt.hashSync(passwordRecibida, 10);
-
-    //Instancia un nuevo documento de mongoDB para luego ser guardado
-    const newuser = new user ({
-        username,
-        password: newPassword,
-        email
-    });
-
-    //Se alamacena en la base de datos de forma asincronica .save()
-
-    const user = await newuser.save();
-
-    return res.json({
-        msg: 'Usuario creado',
-        user
-    });
-};
-
-//Controlador para actualizar usuario, se usa ID de usuario
-ctrluser.putuser = async(req, res) => {
-
-    const userId = req.params.id;
-
-    const { username, email, isActive, role, ...otraData} = req.body;
-    
-    const data = {username, email, isActive, role};
+    const {username, password} = req.body;
 
     try{
-        const dataUpdated = await user.findByIdAndUpdate(userId, data, {new: true});
-        
-        return res.json({
-            msg: 'Usuario actualizado',
-            dataUpdated
-        })
+        //Busca si el usuario existe
+        const user = await User.findOne({ username});
+
+        if(!user){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Error al autenticarse (usuario, para no perderme jaja)' 
+            });
+        }
+        if (!user.isActive){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Error al autenticarse(inactivo)'
+            });
+        }
+
+        //verificar contra
+        const validPassword= bcrypt.compareSync(password, user.password);
+
+        if (!validPassword) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Error al autenticarse (contra)'
+            })
+        }
     }catch(error){
-        return res.status(500).json({
-            msg: 'Error al actualizar'
-        })
+        return res.json({msg: 'Error al iniciar sesion'});
     }
 };
 
-//Eliminar usuario, usa ID
-ctrluser.deleteuser = async (req, res) => {
-    return res.json({
-        msg: ''
-    })
-}
-
-module.exports = ctrluser;
+module.exports = ctrlAuth;
