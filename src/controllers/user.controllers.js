@@ -40,7 +40,7 @@ ctrlUser.postUser = async (req, res) =>{
 ctrlUser.putUser = async(req, res) => {
 
     const userId = req.params.id;
-
+    
     const { username, email, isActive, role, ...otraData} = req.body;
     
     const data = {username, email, isActive, role};
@@ -65,5 +65,6 @@ ctrlUser.deleteUser = async (req, res) => {
         msg: ''
     })
 }
+
 
 module.exports = ctrlUser;

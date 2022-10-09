@@ -13,10 +13,7 @@ const validarJWT = require('../middlewares/validar-jwt');
 //rutas
 
 //ruta para obtener usuarios
-router.get('/user',[
-    validarJWT,
-    esAdmin
-], getUsers);
+router.get('/user', getUsers);
 
 //crear usuario
 router.post('/user', postUser);

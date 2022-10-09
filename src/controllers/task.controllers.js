@@ -6,11 +6,11 @@ ctrlTask.putTask = async (req, res)=>{
 
     const {id} = req.params;
 
-    const {title, description} = req.body;
+    const {title, description, isDone, isActive} = req.body;
 
     const getTask = await Tasks.updateOne({_id: id, userId: _id},{
         $set: {
-            title, description
+            title, description, isDone, isActive
         }
     });
 
