@@ -24,7 +24,7 @@ router.put('/user/:id', [
 ], putUser);
 
 //eliminar usuario, usa ID
-router.delete('/user', [
+router.delete('/user/:id', [
     validarJWT
 ], deleteUser);
 

@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Task = require('../models/tasks')
 const bcrypt = require('bcrypt');
 const ctrlUser = {};
 
@@ -40,7 +41,7 @@ ctrlUser.postUser = async (req, res) =>{
 ctrlUser.putUser = async(req, res) => {
 
     const userId = req.params.id;
-    
+
     const { username, email, isActive, role, ...otraData} = req.body;
     
     const data = {username, email, isActive, role};
@@ -61,9 +62,26 @@ ctrlUser.putUser = async(req, res) => {
 
 //Eliminar usuario, usa ID
 ctrlUser.deleteUser = async (req, res) => {
-    return res.json({
-        msg: ''
-    })
+
+    const userId=req.params.id;
+
+    try{
+        const deleteTask = await Task.deleteMany({userId})
+        const deleteUser = await User.deleteOne({userId})
+        return res.json({
+            msg: 'Usuario borrado y sus tareas',
+            deleteUser,
+            deleteTask
+        })
+    }catch(error){
+        return res.json({
+            msg: 'Error al borrar',
+            deleteUser,
+            deleteTask
+        })
+    }
+
+
 }
 
 
