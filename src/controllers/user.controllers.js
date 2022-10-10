@@ -42,6 +42,7 @@ ctrlUser.putUser = async(req, res) => {
 
     const userId = req.params.id;
 
+    //otraData serian el resto de datos de mi esquema
     const { username, email, isActive, role, ...otraData} = req.body;
     
     const data = {username, email, isActive, role};
@@ -66,8 +67,8 @@ ctrlUser.deleteUser = async (req, res) => {
     const userId=req.params.id;
 
     try{
-        const deleteTask = await Task.deleteMany({userId})
-        const deleteUser = await User.deleteOne({userId})
+        const deleteTask = await Task.findByIdAndDelete(userId)
+        const deleteUser = await User.findByIdAndDelete(userId)
         return res.json({
             msg: 'Usuario borrado y sus tareas',
             deleteUser,
