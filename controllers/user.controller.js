@@ -41,6 +41,7 @@ ctrluser.putuser = async(req, res) => {
 
     const userId = req.params.id;
 
+    //otraData serian el resto de datos de mi esquema
     const { username, email, isActive, role, ...otraData} = req.body;
     
     const data = {username, email, isActive, role};
@@ -60,10 +61,34 @@ ctrluser.putuser = async(req, res) => {
 };
 
 //Eliminar usuario, usa ID
+<<<<<<< HEAD:controllers/user.controller.js
 ctrluser.deleteuser = async (req, res) => {
     return res.json({
         msg: ''
     })
+=======
+ctrlUser.deleteUser = async (req, res) => {
+
+    const userId=req.params.id;
+
+    try{
+        const deleteTask = await Task.findByIdAndDelete(userId)
+        const deleteUser = await User.findByIdAndDelete(userId)
+        return res.json({
+            msg: 'Usuario borrado y sus tareas',
+            deleteUser,
+            deleteTask
+        })
+    }catch(error){
+        return res.json({
+            msg: 'Error al borrar',
+            deleteUser,
+            deleteTask
+        })
+    }
+
+
+>>>>>>> bfeff16 ((Ahora si funciona bien el borrar usuario) TE BORRE FEDERICO PELUCHE):src/controllers/user.controllers.js
 }
 
 module.exports = ctrluser;
