@@ -18,14 +18,11 @@ const UserSchema = new Schema({
         type: Boolean,
         default: true
     },
-    role:{
-        type: Array,
-    }   
 },{
     versionKey: false,
     timestamps: true
 });
-
+//método de representación de los datos en la bd
 UserSchema.methods.toJSON = function() {
     const {password, _id, ...user } = this.toObject();
     user.uid= _id;
