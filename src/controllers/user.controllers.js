@@ -67,7 +67,7 @@ ctrlUser.deleteUser = async (req, res) => {
     const userId=req.params.id;
 
     try{
-        const deleteTask = await Task.findByIdAndDelete(userId)
+        const deleteTask = await Task.deleteMany({userId: userId})
         const deleteUser = await User.findByIdAndDelete(userId)
         return res.json({
             msg: 'Usuario borrado y sus tareas',
