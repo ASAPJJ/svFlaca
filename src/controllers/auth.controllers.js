@@ -15,17 +15,17 @@ ctrlAuth.iniciarSesion = async(req, res) => {
         if(!user){
             return res.status(400).json({
                 ok: false,
-                msg: 'Error al autenticarse (usuario, para no perderme jaja)' 
+                msg: 'Error al autenticar usuario' 
             });
         }
         if (!user.isActive){
             return res.status(400).json({
                 ok: false,
-                msg: 'Error al autenticarse(inactivo)'
+                msg: 'Error: usuario inactivo'
             });
         }
 
-        //verificar contra
+        //verificar password
         const validPassword= bcrypt.compareSync(password, user.password);
 
         if (!validPassword) {
@@ -38,7 +38,7 @@ ctrlAuth.iniciarSesion = async(req, res) => {
         res.json(token)
     }catch(error){
         console.log(error)
-        return res.json({msg: 'Error al iniciar sesion'});
+        return res.json({msg: 'Error al iniciar sesión'});
         
     }
 };
