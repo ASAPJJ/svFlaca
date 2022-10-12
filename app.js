@@ -6,7 +6,8 @@ const helmet = require('helmet');
 const path = require('path');
 require('ejs');
 
-const dbConnect = require('./db/db');// conexion
+const dbConnect = require('./src/db/db');//futura conexion
+require('dotenv').config()
 
 //Iniciando express y conectando la base de datos
 const app= express();
@@ -25,18 +26,17 @@ app.use(morgan('dev'));
 app.use(helmet());
 
 //Archivos Estaticos
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'src/public')));
 
 //Motor de plantillas ejs
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //Importacion de futuras rutas
-
-app.use(require('./routes/user.routes'))
-app.use(require('./routes/task.routes'))
-app.use(require('./routes/auth.routes'))
-
+app.use(require('./routes/home.routes'))
+app.use(require('./src/routes/user.routes'))
+app.use(require('./src/routes/task.routes'))
+app.use(require('./src/routes/auth.routes'))
 
 //config del puerto
 app.listen(port, ()=> console.log(`Servidor escuchando en: ${port}`));
