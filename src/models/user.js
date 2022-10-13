@@ -17,10 +17,7 @@ const UserSchema = new Schema({
     isActive:{
         type: Boolean,
         default: true
-    },
-    role:{
-        type: Array,
-    }   
+    }  
 },{
     versionKey: false,
     timestamps: true

@@ -7,7 +7,6 @@ const {
     deleteUser,
 
 } = require('../controllers/user.controllers');
-const esAdmin = require('../middlewares/es-admin');
 const validarJWT = require('../middlewares/validar-jwt');
 
 //rutas

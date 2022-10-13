@@ -9,7 +9,7 @@ ctrlUser.getUsers = async (req, res) => {
     const users = await User.find();
 
     //Devolucion de los datos de usuario en un arreglo
-    return res.json(users)
+    return res.json({users})
 };
 
 //Aca se crea un nuevo usuario en la base de datos
@@ -32,7 +32,7 @@ ctrlUser.postUser = async (req, res) =>{
     const user = await newuser.save();
 
     return res.json({
-        msg: 'Usuario creado',
+        msg: "Usuario creado",
         user
     });
 };
@@ -43,9 +43,9 @@ ctrlUser.putUser = async(req, res) => {
     const userId = req.params.id;
 
     //otraData serian el resto de datos de mi esquema
-    const { username, email, isActive, role, ...otraData} = req.body;
+    const { username, email, isActive, ...otraData} = req.body;
     
-    const data = {username, email, isActive, role};
+    const data = {username, email, isActive};
 
     try{
         const dataUpdated = await User.findByIdAndUpdate(userId, data, {new: true});
