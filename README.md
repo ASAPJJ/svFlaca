@@ -1,6 +1,4 @@
-# Test LA RAMA DESARROLLADA ES ramajuanjo.
-
-Este servidor es para el examen de TLP II, Back-end.
+# Este servidor es para el examen de TLP II, Back-end. 
 
 Es necesaria una conexion a una base de datos de mongoDB.
 
