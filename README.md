@@ -1,6 +1,8 @@
 # Este servidor es para el examen de TLP II, Back-end. 
 
-Es necesaria una conexion a una base de datos de mongoDB.
+Es necesaria una conexion a una base de datos de mongoDB (src/db/db.js).
+
+Para iniciar el server el comando es: 'npm run dev'
 
 La estructura de user es:
 {
@@ -22,7 +24,9 @@ SOFT DELETE en PUT colocando
 {
     isActive: false
 }
------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
 Para usar task es necesario tener un token de acceso.
 La estructura de task es:
 {
